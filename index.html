@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    
+<!-- B5 Chat Widget -->
+<script>
+(function() {
+  const CHAT_URL = 'https://nyansafrontendb5.onrender.com/landing.html';
+
+  // Create container
+  const container = document.createElement('div');
+  container.id = 'b5-chat-widget';
+  container.style.cssText = 'all: initial;';
+  document.body.appendChild(container);
+
+  // Attach shadow DOM
+  const shadow = container.attachShadow({ mode: 'open' });
+
+  shadow.innerHTML = `
+    <style>
+      :host { all: initial; }
+
+      .chat-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: white;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: all 0.3s ease;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .chat-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .chat-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .chat-btn:active {
+        transform: scale(0.95);
+      }
+
+      .chat-panel {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 420px;
+        height: 600px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+        display: none;
+        flex-direction: column;
+        z-index: 9998;
+        overflow: hidden;
+        animation: slideUp 0.3s ease;
+      }
+
+      .chat-panel.open {
+        display: flex;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .chat-header {
+        background: linear-gradient(135deg, #970A3D 0%, #6B0A2D 100%);
+        color: white;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 12px 12px 0 0;
+      }
+
+      .chat-title {
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 24px;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s;
+      }
+
+      .close-btn:hover {
+        transform: rotate(90deg);
+      }
+
+      .chat-iframe {
+        flex: 1;
+        border: none;
+        width: 100%;
+        height: 100%;
+      }
+
+      @media (max-width: 480px) {
+        .chat-panel {
+          width: 100vw;
+          height: 100vh;
+          bottom: 0;
+          right: 0;
+          border-radius: 0;
+        }
+
+        .chat-btn {
+          bottom: 20px;
+          right: 20px;
+        }
+      }
+    </style>
+
+    <button class="chat-btn" id="chatBtn" title="Open Chat"><img src="bot.png" alt="Chat Bot"></button>
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-header">
+        <span class="chat-title">B5 Intelligent</span>
+        <button class="close-btn" id="closeBtn">✕</button>
+      </div>
+      <iframe class="chat-iframe" id="chatIframe" src="about:blank" allow="clipboard-write; fullscreen"></iframe>
+    </div>
+  `;
+
+  const chatBtn = shadow.getElementById('chatBtn');
+  const chatPanel = shadow.getElementById('chatPanel');
+  const closeBtn = shadow.getElementById('closeBtn');
+  const chatIframe = shadow.getElementById('chatIframe');
+  let isOpen = false;
+
+  chatBtn.addEventListener('click', () => {
+    isOpen = !isOpen;
+    if (isOpen) {
+      chatPanel.classList.add('open');
+      if (chatIframe.src === 'about:blank') {
+        chatIframe.src = CHAT_URL;
+      }
+      document.body.style.overflow = 'hidden';
+    } else {
+      chatPanel.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    isOpen = false;
+    chatPanel.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  // Close on outside click
+  shadow.addEventListener('click', (e) => {
+    if (e.target === chatPanel) {
+      isOpen = false;
+      chatPanel.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) {
+      isOpen = false;
+      chatPanel.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+</script>
+<!-- End B5 Chat Widget -->
+            
+  </body>
+</html>
