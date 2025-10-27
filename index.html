@@ -148,10 +148,6 @@
           bottom: 0;
           right: 0;
         }
-
-        .chat-btn {
-          display: none !important;
-        }
       }
     </style>
 
@@ -171,17 +167,35 @@
   const chatIframe = shadow.getElementById('chatIframe');
   let isOpen = false;
 
+  function isMobile() {
+    return window.innerWidth <= 480;
+  }
+
+  function showButton() {
+    if (isMobile()) {
+      chatBtn.style.display = 'flex';
+    }
+  }
+
+  function hideButton() {
+    if (isMobile()) {
+      chatBtn.style.display = 'none';
+    }
+  }
+
   chatBtn.addEventListener('click', () => {
 
     isOpen = !isOpen;
     if (isOpen) {
       chatPanel.classList.add('open');
+      hideButton();
       if (chatIframe.src === 'about:blank') {
         chatIframe.src = CHAT_URL;
       }
       document.body.style.overflow = 'hidden';
     } else {
       chatPanel.classList.remove('open');
+      showButton();
       document.body.style.overflow = '';
     }
   });
@@ -190,6 +204,7 @@
     e.stopPropagation();
     isOpen = false;
     chatPanel.classList.remove('open');
+    showButton();
     document.body.style.overflow = '';
   });
 
@@ -198,6 +213,7 @@
     if (e.target === chatPanel) {
       isOpen = false;
       chatPanel.classList.remove('open');
+      showButton();
       document.body.style.overflow = '';
     }
   });
@@ -207,6 +223,7 @@
     if (e.key === 'Escape' && isOpen) {
       isOpen = false;
       chatPanel.classList.remove('open');
+      showButton();
       document.body.style.overflow = '';
     }
   });
