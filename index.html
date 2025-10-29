@@ -74,24 +74,25 @@
         width: 420px;
         height: 600px;
         background: white;
-        border-radius: 12px;
+        border-radius: 0;
         box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
         display: none;
         flex-direction: column;
         z-index: 9998;
         overflow: visible;
         animation: slideUp 0.3s ease;
+        border: 3px solid #be1e2d;
       }
 
       .close-arrow {
         position: absolute;
-        top: 70%;
-        left: 85%;
-        background: transparent;
-        border: 2px solid #be1e2d;
+        top: 1%;
+        left: 88%;
+        background: #fbfbfb;
+        border: 2px solid #fbfbfb;
         color: #be1e2d;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 25px;
         padding: 8px 12px;
         border-radius: 4px;
         width: auto;
@@ -105,8 +106,9 @@
       }
 
       .close-arrow:hover {
-        background: #be1e2d;
-        color: white;
+        background: #ffe6e6;
+        color: #be1e2d;
+        border: 2px solid #fbfbfb;
       }
 
       .chat-panel.open {
@@ -165,13 +167,72 @@
         height: 100%;
       }
 
+    
+      /* 456px to 479px */
+      @media (min-width: 456px) and (max-width: 479px) {
+        .close-arrow {
+          font-size: 25px;
+          padding: 6px 8px;
+          border: 1.5px solid #be1e2d;
+          top: 1%;
+          left: 88%;
+        }
+      }
+
+      /* 249px to 300px */
+      @media (min-width: 249px) and (max-width: 300px) {
+        .close-arrow {
+          top: 1%;
+          left: 80%;
+          font-size: 15px;
+        }
+      }
+
+      /* 300px to 361px */
+      @media (min-width: 300px) and (max-width: 361px) {
+        .close-arrow {
+          top: 0.1%;
+          left: 83%;
+          font-size: 20px;
+        }
+      }
+
+      /* 362px to 423px */
+      @media (min-width: 362px) and (max-width: 423px) {
+        .close-arrow {
+          top: 1%;
+          left: 86%;
+          font-size: 18px;
+        }
+      }
+
+      /* 424px */
+      @media (min-width: 424px) and (max-width: 424px) {
+        .close-arrow {
+          top: 1%;
+          left: 86%;
+        }
+      }
+
+      /* 425px to 480px */
+      @media (min-width: 425px) and (max-width: 480px) {
+        .close-arrow {
+          font-size: 25px;
+          padding: 6px 8px;
+          border: none;
+          top: 1%;
+          left: 87%;
+        }
+      }
+
+      /* Mobile adjustments for all sizes */
       @media (max-width: 480px) {
         .chat-panel {
           width: 85vw;
           height: 70vh;
           bottom: 80px;
           right: 20px;
-          border-radius: 12px;
+          border-radius: 0;
         }
 
         .chat-panel.open {
@@ -179,10 +240,6 @@
           height: 70vh;
           bottom: 80px;
           right: 20px;
-        }
-
-        input, textarea, select, button {
-          font-size: 16px !important;
         }
       }
     </style>
