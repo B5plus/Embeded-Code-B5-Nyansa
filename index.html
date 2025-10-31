@@ -22,8 +22,7 @@
 
   shadow.innerHTML = `
     <style>
-      :host { all: initial; }
-
+      :host { all: initial; } 
       .chat-btn {
         position: fixed;
         bottom: 45px;
@@ -65,8 +64,7 @@
 
       .chat-btn:active {
         transform: scale(0.95);
-      }
-
+      } 
       .chat-panel {
         position: fixed;
         bottom: 90px;
@@ -81,7 +79,7 @@
         z-index: 9998;
         overflow: visible;
         animation: slideUp 0.3s ease;
-        border: 3px solid #be1e2d;
+        border: none;
       }
 
       .close-arrow {
@@ -179,6 +177,7 @@
         }
       }
 
+
       /* 249px to 300px */
       @media (min-width: 249px) and (max-width: 300px) {
         .close-arrow {
@@ -267,7 +266,7 @@
   }
 
   function showButton() {
-    if (isMobile()) {
+    if (isMobile()) { 
       chatBtn.classList.remove('hidden');
     }
   }
@@ -304,7 +303,7 @@
   });
 
   closeArrow.addEventListener('click', (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); 
     isOpen = false;
     chatPanel.classList.remove('open');
     showButton();
